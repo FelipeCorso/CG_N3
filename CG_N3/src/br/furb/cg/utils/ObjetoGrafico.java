@@ -1,11 +1,9 @@
 package br.furb.cg.utils;
 
-import java.util.List;
-
 public class ObjetoGrafico {
 	private int[] cor = new int[3];
-	private List<Ponto> listaPontos;
-	private List<ObjetoGrafico> listaObjGrafico;
+	private Ponto[] vetorPontos;
+	private ObjetoGrafico[] vetorObjGrafico;
 	private Transformacao transformacao;
 	private BBox bBox;
 
@@ -14,11 +12,11 @@ public class ObjetoGrafico {
 	}
 
 	public boolean adicionarObjGrafico(ObjetoGrafico objGrafico) {
-		return listaObjGrafico.add(objGrafico);
+		return true;
 	}
 
 	public boolean removerObjGrafico(ObjetoGrafico objGrafico) {
-		return listaObjGrafico.remove(objGrafico);
+		return true;
 	}
 
 }
