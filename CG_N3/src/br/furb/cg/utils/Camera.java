@@ -17,8 +17,11 @@ public class Camera {
 
 	}
 
-	public void zoom() {
-
+	public void zoom(int x) {
+		this.xMinOrtho2D -= x;
+		this.xMaxOrtho2D += x;
+		this.yMinOrtho2D += x;
+		this.yMaxOrtho2D -= x;
 	}
 
 	public int getxMinOrtho2D() {

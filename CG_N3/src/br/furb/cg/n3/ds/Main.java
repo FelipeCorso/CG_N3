@@ -17,6 +17,8 @@ import br.furb.cg.utils.teclado.KeyMouseListener;
 
 public class Main extends KeyMouseListener implements GLEventListener {
 
+	private static final int ZOOM_IN = -3;
+	private static final int ZOOM_OUT = +3;
 	private int xMinOrtho2D = 0;
 	private int xMaxOrtho2D = 400;
 	private int yMinOrtho2D = 400;
@@ -258,9 +260,15 @@ public class Main extends KeyMouseListener implements GLEventListener {
 	}
 
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent arg0) {
-		// TODO Auto-generated method stub
-		super.mouseWheelMoved(arg0);
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		if (e.getWheelRotation() < 0) {
+			camera.zoom(ZOOM_IN);
+		} else {
+			if (e.getWheelRotation() > 0) {
+				camera.zoom(ZOOM_OUT);
+			}
+		}
+		glDrawable.display();
 	}
 
 	public double getValorX() {
