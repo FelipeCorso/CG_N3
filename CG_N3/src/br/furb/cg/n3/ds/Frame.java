@@ -1,3 +1,4 @@
+package br.furb.cg.n3.ds;
 import java.awt.BorderLayout;
 
 import javax.media.opengl.GLCanvas;
@@ -9,11 +10,12 @@ public class Frame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private Main renderer = new Main();
+	private int janelaLargura  = 400, janelaAltura = 400;
 
 	public Frame() {
 		// Cria o frame.
 		super("CG-N3_Trasnformacao");
-		setBounds(50, 100, 500, 500);
+		setBounds(300,250,janelaLargura,janelaAltura+22);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 
