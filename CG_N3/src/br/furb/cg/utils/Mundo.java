@@ -1,14 +1,15 @@
 package br.furb.cg.utils;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.media.opengl.GL;
 
 import br.furb.cg.n3.ds.ObjetoGrafico;
+import br.furb.cg.n3.ds.Ponto4D;
 
 public class Mundo {
-	LinkedList<ObjetoGrafico> listaObjGrafico = new LinkedList<>();
-	private Camera camera;
+	private List<ObjetoGrafico> listaObjGrafico = new LinkedList<>();
 
 	public void adicionarObjGrafico(ObjetoGrafico objGrafico) {
 		listaObjGrafico.add(objGrafico);
@@ -22,5 +23,15 @@ public class Mundo {
 			obj.atribuirGL(gl);
 			obj.desenha();
 		}
+	}
+
+	public ObjetoGrafico selecionaObjGrafico(Ponto4D ponto) {
+		for (ObjetoGrafico objetoGrafico : listaObjGrafico) {
+			ObjetoGrafico obj = objetoGrafico.seleciona(ponto);
+			if (obj != null)
+				return obj;
+		}
+
+		return null;
 	}
 }
