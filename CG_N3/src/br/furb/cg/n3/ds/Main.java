@@ -90,7 +90,8 @@ public class Main extends KeyMouseListener implements GLEventListener {
 
 		// objeto.desenha();
 		// gl.glBegin(GL.GL_LINES);
-		// /**/gl.glVertex2d(objetoGrafico.getPontos()[0].getX(), objetoGrafico.getPontos()[0].getY());
+		// /**/gl.glVertex2d(objetoGrafico.getPontos()[0].getX(),
+		// objetoGrafico.getPontos()[0].getY());
 		// /**/gl.glVertex2d(0.0, 0.0);
 		// /**/gl.glVertex2d(getValorX(), getValorY());
 		// gl.glEnd();
@@ -226,7 +227,8 @@ public class Main extends KeyMouseListener implements GLEventListener {
 			}
 		} else {
 			if (SwingUtilities.isRightMouseButton(e)) {
-
+				Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
+				objetoGrafico.selecionado(objetoGrafico.naBBox(ponto) && objetoGrafico.scanLine(ponto));
 			}
 		}
 		glDrawable.display();

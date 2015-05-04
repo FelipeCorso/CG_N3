@@ -4,21 +4,30 @@ import java.util.LinkedList;
 
 import javax.media.opengl.GL;
 
+import br.furb.cg.utils.BBox;
+import br.furb.cg.utils.ScanLine;
+
 public final class ObjetoGrafico {
 	GL gl;
 	private float tamanho = 2.0f;
 
+	BBox bBox;
+
 	private LinkedList<Ponto4D> listaPontos = new LinkedList<>();
 
 	private int primitiva = GL.GL_LINE_LOOP;
-	// private Ponto4D[] vertices = { new Ponto4D(10.0, 10.0, 0.0, 1.0), new Ponto4D(20.0, 10.0, 0.0, 1.0), new Ponto4D(20.0, 20.0, 0.0, 1.0), new Ponto4D(10.0, 20.0, 0.0, 1.0) };
+	// private Ponto4D[] vertices = { new Ponto4D(10.0, 10.0, 0.0, 1.0), new
+	// Ponto4D(20.0, 10.0, 0.0, 1.0), new Ponto4D(20.0, 20.0, 0.0, 1.0), new
+	// Ponto4D(10.0, 20.0, 0.0, 1.0) };
 
 	// private int primitiva = GL.GL_POINTS;
 	// private Ponto4D[] vertices = { new Ponto4D(10.0, 10.0, 0.0, 1.0) };
 
 	private Transformacao4D matrizObjeto = new Transformacao4D();
+	private boolean selecionado;
 
-	// / Matrizes temporarias que sempre sao inicializadas com matriz Identidade entao podem ser "static".
+	// / Matrizes temporarias que sempre sao inicializadas com matriz Identidade
+	// entao podem ser "static".
 	private static Transformacao4D matrizTmpTranslacao = new Transformacao4D();
 	private static Transformacao4D matrizTmpTranslacaoInversa = new Transformacao4D();
 	private static Transformacao4D matrizTmpEscala = new Transformacao4D();
@@ -57,6 +66,10 @@ public final class ObjetoGrafico {
 			gl.glVertex2d(ponto.getX(), ponto.getY());
 		}
 		gl.glEnd();
+		
+		if (selecionado) {
+			bBox.desenharBBox(gl);
+		}
 
 		// ////////// ATENCAO: chamar desenho dos filhos...
 
@@ -125,14 +138,35 @@ public final class ObjetoGrafico {
 	}
 
 	public void exibeVertices() {
-		// System.out.println("P0[" + vertices[0].obterX() + "," + vertices[0].obterY() + "," + vertices[0].obterZ() + "," + vertices[0].obterW() + "]");
-		// System.out.println("P1[" + vertices[1].obterX() + "," + vertices[1].obterY() + "," + vertices[1].obterZ() + "," + vertices[1].obterW() + "]");
-		// System.out.println("P2[" + vertices[2].obterX() + "," + vertices[2].obterY() + "," + vertices[2].obterZ() + "," + vertices[2].obterW() + "]");
-		// System.out.println("P3[" + vertices[3].obterX() + "," + vertices[3].obterY() + "," + vertices[3].obterZ() + "," + vertices[3].obterW() + "]");
+		// System.out.println("P0[" + vertices[0].obterX() + "," +
+		// vertices[0].obterY() + "," + vertices[0].obterZ() + "," +
+		// vertices[0].obterW() + "]");
+		// System.out.println("P1[" + vertices[1].obterX() + "," +
+		// vertices[1].obterY() + "," + vertices[1].obterZ() + "," +
+		// vertices[1].obterW() + "]");
+		// System.out.println("P2[" + vertices[2].obterX() + "," +
+		// vertices[2].obterY() + "," + vertices[2].obterZ() + "," +
+		// vertices[2].obterW() + "]");
+		// System.out.println("P3[" + vertices[3].obterX() + "," +
+		// vertices[3].obterY() + "," + vertices[3].obterZ() + "," +
+		// vertices[3].obterW() + "]");
 		// System.out.println("anguloGlobal:" + anguloGlobal);
 	}
 
 	public void addPonto(Ponto4D ponto) {
 		listaPontos.add(ponto);
+	}
+
+	public boolean naBBox(Ponto4D ponto) {
+		bBox = new BBox(listaPontos);
+		return bBox.dentoBBox(ponto.getX(), ponto.getY());
+	}
+
+	public boolean scanLine(Ponto4D ponto) {
+		return ScanLine.pontoDoPoligono(listaPontos, ponto);
+	}
+
+	public void selecionado(boolean b) {
+		selecionado = b;
 	}
 }
