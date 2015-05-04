@@ -1,6 +1,7 @@
 package br.furb.cg.n3.ds;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.media.opengl.GL;
 
@@ -8,10 +9,11 @@ import br.furb.cg.utils.BBox;
 import br.furb.cg.utils.ScanLine;
 
 public final class ObjetoGrafico {
+
 	GL gl;
 	private float tamanho = 2.0f;
 
-	BBox bBox;
+	private BBox bBox = new BBox(getListaPontos());
 
 	private LinkedList<Ponto4D> listaPontos = new LinkedList<>();
 
@@ -33,6 +35,7 @@ public final class ObjetoGrafico {
 	private static Transformacao4D matrizTmpEscala = new Transformacao4D();
 	// private static Transformacao4D matrizTmpRotacaoZ = new Transformacao4D();
 	private static Transformacao4D matrizGlobal = new Transformacao4D();
+	private List<ObjetoGrafico> listaObjGraficos = new LinkedList<>();
 
 	// private double anguloGlobal = 0.0;
 
@@ -66,7 +69,7 @@ public final class ObjetoGrafico {
 			gl.glVertex2d(ponto.getX(), ponto.getY());
 		}
 		gl.glEnd();
-		
+
 		if (selecionado) {
 			bBox.desenharBBox(gl);
 		}
@@ -157,16 +160,43 @@ public final class ObjetoGrafico {
 		listaPontos.add(ponto);
 	}
 
-	public boolean naBBox(Ponto4D ponto) {
-		bBox = new BBox(listaPontos);
-		return bBox.dentoBBox(ponto.getX(), ponto.getY());
+	public ObjetoGrafico selecionaObjeto(Ponto4D ponto) {
+		if (getbBox().dentroBBox(ponto.getX(), ponto.getY())) {
+			if (ScanLine.pontoDoPoligono(getListaPontos(), ponto)) {
+				return this;
+			}
+		}
+
+		for (ObjetoGrafico objetoGrafico : getListaObjGraficos()) {
+			ObjetoGrafico obj = objetoGrafico.selecionaObjeto(ponto);
+			if (obj != null)
+				return obj;
+		}
+		return null;
 	}
 
-	public boolean scanLine(Ponto4D ponto) {
-		return ScanLine.pontoDoPoligono(listaPontos, ponto);
+	public Ponto4D selecionaPonto(Ponto4D ponto) {
+		for (Ponto4D point : getListaPontos()) {
+			if (ponto.getDistance(point) < 50) {
+				return point;
+			}
+		}
+		return null;
 	}
 
-	public void selecionado(boolean b) {
-		selecionado = b;
+	public BBox getbBox() {
+		return bBox;
+	}
+
+	public void setbBox(BBox bBox) {
+		this.bBox = bBox;
+	}
+
+	public LinkedList<Ponto4D> getListaPontos() {
+		return listaPontos;
+	}
+
+	public List<ObjetoGrafico> getListaObjGraficos() {
+		return listaObjGraficos;
 	}
 }
