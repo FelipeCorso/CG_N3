@@ -18,6 +18,10 @@ public class BBox {
 	public double yMinBBox;
 	public double yMaxBBox;
 
+	public BBox() {
+
+	}
+
 	public BBox(List<Ponto4D> vertices) {
 		if (vertices.size() > 0) {
 			xMinBBox = xMaxBBox = vertices.get(0).getX();
@@ -32,6 +36,14 @@ public class BBox {
 		}
 	}
 
+	public double getCentroX() {
+		return ((xMaxBBox - xMinBBox) / 2) + xMinBBox;
+	}
+
+	public double getCentroY() {
+		return ((yMaxBBox - yMinBBox) / 2) + yMinBBox;
+	}
+
 	public void desenharBBox(GL gl) {
 		gl.glColor3f(0, 1.0f, 1.0f);
 
@@ -43,7 +55,12 @@ public class BBox {
 		gl.glEnd();
 	}
 
-	public boolean dentoBBox(double x, double y) {
+	public boolean dentroBBox(Ponto4D ponto) {
+		return dentroBBox(ponto.getX(), ponto.getY());
+	}
+
+	public boolean dentroBBox(double x, double y) {
 		return x <= xMaxBBox && x >= xMinBBox && y <= yMaxBBox && y >= yMinBBox;
 	}
+
 }

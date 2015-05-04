@@ -7,6 +7,8 @@ import javax.media.opengl.GLCapabilities;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import br.furb.cg.painelAjuda.JFrameAjuda;
+
 public class Frame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -44,6 +46,7 @@ public class Frame extends JFrame {
 
 	public static void main(String[] args) {
 		new Frame().setVisible(true);
+		new JFrameAjuda().setVisible(true);
 	}
 
 }

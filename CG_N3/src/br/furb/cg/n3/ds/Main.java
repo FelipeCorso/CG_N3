@@ -97,6 +97,7 @@ public class Main extends KeyMouseListener implements GLEventListener {
 		// gl.glEnd();
 		desenhaPonto();
 		desenhaObjetosMundo();
+		desenhaBBox();
 
 		gl.glFlush();
 	}
@@ -113,6 +114,12 @@ public class Main extends KeyMouseListener implements GLEventListener {
 
 	public void desenhaObjetosMundo() {
 		mundo.desenha(gl);
+	}
+
+	public void desenhaBBox() {
+		if (objetoGrafico != null) {
+			// objetoGrafico.getbBox().desenharBBox(gl);
+		}
 	}
 
 	public void desenhaSRU() {
@@ -148,51 +155,128 @@ public class Main extends KeyMouseListener implements GLEventListener {
 	public void keyPressed(KeyEvent e) {
 
 		switch (e.getKeyCode()) {
-		case KeyEvent.VK_P:
-			objetos[0].exibeVertices();
-			break;
-		case KeyEvent.VK_M:
-			objetos[0].exibeMatriz();
-			break;
 
+		/*
+		 * Q - Rotaciona para a esquerda
+		 */
+		case KeyEvent.VK_Q:
+			if (objetoGrafico != null)
+				objetoGrafico.rotacaoZ(-3);
+			break;
+		/*
+		 * E - Rotaciona para a direita
+		 */
+		case KeyEvent.VK_E:
+			if (objetoGrafico != null)
+				objetoGrafico.rotacaoZ(3);
+			break;
+		/*
+		 * W - Translacao para cima
+		 */
+		case KeyEvent.VK_W:
+			if (objetoGrafico != null)
+				objetoGrafico.translacaoXY(0, -3);
+			break;
+		/*
+		 * S - Translacao para baixo
+		 */
+		case KeyEvent.VK_S:
+			if (objetoGrafico != null)
+				objetoGrafico.translacaoXY(0, 3);
+			break;
+		/*
+		 * A - Translacao para esquerda
+		 */
+		case KeyEvent.VK_A:
+			if (objetoGrafico != null)
+				objetoGrafico.translacaoXY(-3, 0);
+			break;
+		/*
+		 * D - Translacao para direita
+		 */
+		case KeyEvent.VK_D:
+			if (objetoGrafico != null)
+				objetoGrafico.translacaoXY(3, 0);
+			break;
+		/*
+		 * R - Resetar
+		 */
 		case KeyEvent.VK_R:
-			objetos[0].atribuirIdentidade();
+			if (objetoGrafico != null)
+				objetoGrafico.atribuirIdentidade();
 			break;
-
-		case KeyEvent.VK_RIGHT:
-			objetos[0].translacaoXYZ(2.0, 0.0, 0.0);
-			break;
-		case KeyEvent.VK_LEFT:
-			objetos[0].translacaoXYZ(-2.0, 0.0, 0.0);
-			break;
+		/*
+		 * Seta Cima - Movimentar câmera
+		 */
 		case KeyEvent.VK_UP:
-			objetos[0].translacaoXYZ(0.0, 2.0, 0.0);
+			camera.pan(0, 3);
 			break;
+		/*
+		 * Seta Baixo - Movimentar câmera
+		 */
 		case KeyEvent.VK_DOWN:
-			objetos[0].translacaoXYZ(0.0, -2.0, 0.0);
+			camera.pan(0, -3);
 			break;
-
-		case KeyEvent.VK_PAGE_UP:
-			objetos[0].escalaXYZ(2.0, 2.0);
+		/*
+		 * Seta Esquerda - Movimentar câmera
+		 */
+		case KeyEvent.VK_LEFT:
+			camera.pan(3, 0);
 			break;
-		case KeyEvent.VK_PAGE_DOWN:
-			objetos[0].escalaXYZ(0.5, 0.5);
+		/*
+		 * Seta Direita - Movimentar câmera
+		 */
+		case KeyEvent.VK_RIGHT:
+			camera.pan(-3, 0);
 			break;
-
-		case KeyEvent.VK_HOME:
-			// objetos[0].RoracaoZ();
+		/*
+		 * P - Altera a primitiva
+		 */
+		case KeyEvent.VK_P:
+			if (objetoGrafico != null) {
+				if (objetoGrafico.obterPrimitava() == GL.GL_LINE_LOOP) {
+					objetoGrafico.alterarPrimitava(GL.GL_LINE_STRIP);
+				} else {
+					objetoGrafico.alterarPrimitava(GL.GL_LINE_LOOP);
+				}
+			}
 			break;
-
-		case KeyEvent.VK_1:
-			objetos[0].escalaXYZPtoFixo(0.5, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
+		/*
+		 * + - Aumenta a escala
+		 */
+		case KeyEvent.VK_ADD:
+			if (objetoGrafico != null)
+				objetoGrafico.escalaXY(2.0, 2.0);
 			break;
-
-		case KeyEvent.VK_2:
-			objetos[0].escalaXYZPtoFixo(2.0, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
+		/*
+		 * - Diminui a escala
+		 */
+		case KeyEvent.VK_SUBTRACT:
+			if (objetoGrafico != null)
+				objetoGrafico.escalaXY(0.5, 0.5);
 			break;
-
-		case KeyEvent.VK_3:
-			objetos[0].rotacaoZPtoFixo(10.0, new Ponto4D(-15.0, -15.0, 0.0, 0.0));
+		/*
+		 * Inserir - Insere um objeto
+		 */
+		case KeyEvent.VK_INSERT:
+			if (objetoGrafico == null) {
+				objetoGrafico = new ObjetoGrafico();
+				mundo.adicionarObjGrafico(objetoGrafico);
+			} else {
+				ObjetoGrafico obj = new ObjetoGrafico();
+				objetoGrafico.adicionaObjGrafico(obj);
+				objetoGrafico = obj;
+			}
+			break;
+		/*
+		 * Delete - Remove o objeto
+		 */
+		case KeyEvent.VK_DELETE:
+			if (objetoGrafico != null) {
+				mundo.removeObjGrafico(objetoGrafico);
+				objetoGrafico = null;
+				pontoSelecionado = null;
+			}
 			break;
 		}
 
@@ -228,7 +312,10 @@ public class Main extends KeyMouseListener implements GLEventListener {
 		} else {
 			if (SwingUtilities.isRightMouseButton(e)) {
 				Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
-				objetoGrafico.selecionado(objetoGrafico.naBBox(ponto) && objetoGrafico.scanLine(ponto));
+				objetoGrafico = mundo.selecionaObjGrafico(ponto);
+				if (objetoGrafico != null) {
+					pontoSelecionado = objetoGrafico.selecionaPonto(ponto);
+				}
 			}
 		}
 		glDrawable.display();

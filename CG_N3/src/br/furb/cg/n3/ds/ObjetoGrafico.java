@@ -13,9 +13,9 @@ public final class ObjetoGrafico {
 	GL gl;
 	private float tamanho = 2.0f;
 
-	private BBox bBox = new BBox(getListaPontos());
-
 	private LinkedList<Ponto4D> listaPontos = new LinkedList<>();
+
+	private BBox bBox = new BBox(getListaPontos());
 
 	private int primitiva = GL.GL_LINE_LOOP;
 	// private Ponto4D[] vertices = { new Ponto4D(10.0, 10.0, 0.0, 1.0), new
@@ -50,6 +50,10 @@ public final class ObjetoGrafico {
 		return tamanho;
 	}
 
+	public void alterarPrimitava(int cod_primitiva) {
+		this.primitiva = cod_primitiva;
+	}
+
 	public double obterPrimitava() {
 		return primitiva;
 	}
@@ -70,13 +74,19 @@ public final class ObjetoGrafico {
 		}
 		gl.glEnd();
 
-		if (selecionado) {
-			bBox.desenharBBox(gl);
-		}
+		// if (selecionado) {
+		bBox = new BBox(getListaPontos());
+		bBox.desenharBBox(gl);
+		// }
 
 		// ////////// ATENCAO: chamar desenho dos filhos...
 
 		gl.glPopMatrix();
+	}
+
+	public void translacaoXY(double tx, double ty) {
+		Ponto4D ponto = new Ponto4D(tx, ty);
+		translacaoXYZ(ponto.getX(), ponto.getY(), ponto.getZ());
 	}
 
 	public void translacaoXYZ(double tx, double ty, double tz) {
@@ -85,7 +95,7 @@ public final class ObjetoGrafico {
 		matrizObjeto = matrizTranslate.transformMatrix(matrizObjeto);
 	}
 
-	public void escalaXYZ(double Sx, double Sy) {
+	public void escalaXY(double Sx, double Sy) {
 		Transformacao4D matrizScale = new Transformacao4D();
 		matrizScale.atribuirEscala(Sx, Sy, 1.0);
 		matrizObjeto = matrizScale.transformMatrix(matrizObjeto);
@@ -97,6 +107,25 @@ public final class ObjetoGrafico {
 		// Transformacao4D matrizRotacaoZ = new Transformacao4D();
 		// matrizRotacaoZ.atribuirRotacaoZ(Transformacao4D.DEG_TO_RAD * angulo);
 		// matrizObjeto = matrizRotacaoZ.transformMatrix(matrizObjeto);
+
+		Transformacao4D matrizGlobal = new Transformacao4D();
+		Transformacao4D matrizTranslacao = new Transformacao4D();
+		Transformacao4D matrizRotacao = new Transformacao4D();
+		Transformacao4D matrizTranslacaoInversa = new Transformacao4D();
+		Ponto4D ponto = new Ponto4D(-getBBox().getCentroX(), -getBBox().getCentroY());
+		matrizTranslacao.atribuirTranslacao(ponto.getX(), ponto.getY(), ponto.getZ());
+
+		matrizRotacao.atribuirRotacaoZ(Transformacao4D.DEG_TO_RAD * angulo);
+
+		Ponto4D pontoTranslacaoInversa = new Ponto4D(getBBox().getCentroX(), getBBox().getCentroY());
+		matrizTranslacaoInversa.atribuirTranslacao(pontoTranslacaoInversa.getX(), pontoTranslacaoInversa.getY(), pontoTranslacaoInversa.getZ());
+
+		matrizGlobal = matrizTranslacao.transformMatrix(matrizGlobal);
+		matrizGlobal = matrizRotacao.transformMatrix(matrizGlobal);
+		matrizGlobal = matrizTranslacaoInversa.transformMatrix(matrizGlobal);
+
+		matrizObjeto = matrizObjeto.transformMatrix(matrizGlobal);
+
 	}
 
 	public void atribuirIdentidade() {
@@ -160,8 +189,12 @@ public final class ObjetoGrafico {
 		listaPontos.add(ponto);
 	}
 
+	public void adicionaObjGrafico(ObjetoGrafico objetoGrafico) {
+		listaObjGraficos.add(objetoGrafico);
+	}
+
 	public ObjetoGrafico selecionaObjeto(Ponto4D ponto) {
-		if (getbBox().dentroBBox(ponto.getX(), ponto.getY())) {
+		if (getBBox().dentroBBox(ponto.getX(), ponto.getY())) {
 			if (ScanLine.pontoDoPoligono(getListaPontos(), ponto)) {
 				return this;
 			}
@@ -175,6 +208,20 @@ public final class ObjetoGrafico {
 		return null;
 	}
 
+	public void removeObjGrafico(ObjetoGrafico objGrafico) {
+		if (getListaObjGraficos().contains(objGrafico)) {
+			getListaObjGraficos().remove(objGrafico);
+			setBBox(new BBox(getListaPontos()));
+			for (Ponto4D ponto : getListaPontos()) {
+				getBBox().dentroBBox(ponto);
+			}
+		} else {
+			for (ObjetoGrafico objeto : getListaObjGraficos()) {
+				objeto.removeObjGrafico(objGrafico);
+			}
+		}
+	}
+
 	public Ponto4D selecionaPonto(Ponto4D ponto) {
 		for (Ponto4D point : getListaPontos()) {
 			if (ponto.getDistance(point) < 50) {
@@ -184,11 +231,11 @@ public final class ObjetoGrafico {
 		return null;
 	}
 
-	public BBox getbBox() {
+	public BBox getBBox() {
 		return bBox;
 	}
 
-	public void setbBox(BBox bBox) {
+	public void setBBox(BBox bBox) {
 		this.bBox = bBox;
 	}
 
@@ -199,4 +246,5 @@ public final class ObjetoGrafico {
 	public List<ObjetoGrafico> getListaObjGraficos() {
 		return listaObjGraficos;
 	}
+
 }

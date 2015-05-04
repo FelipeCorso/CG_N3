@@ -41,6 +41,13 @@ public final class Ponto4D {
 		return pto;
 	}
 
+	public double getDistance(Ponto4D ponto) {
+		double retx = Math.pow((x - ponto.getX()), 2);
+		double rety = Math.pow((y - ponto.getY()), 2);
+		double ret = Math.sqrt(retx + rety);
+		return ret;
+	}
+
 	// / Obter valor X do ponto.
 	public double obterX() {
 		return x;
@@ -90,6 +97,10 @@ public final class Ponto4D {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+
+	public double getZ() {
+		return z;
 	}
 
 	// / Atribuir valor W do ponto.

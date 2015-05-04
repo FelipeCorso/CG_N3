@@ -13,8 +13,11 @@ public class Camera {
 		this.yMaxOrtho2D = yMaxOrtho2D;
 	}
 
-	public void pan() {
-
+	public void pan(double x, double y) {
+		this.xMinOrtho2D += x;
+		this.xMaxOrtho2D += x;
+		this.yMinOrtho2D += y;
+		this.yMaxOrtho2D += y;
 	}
 
 	public void zoom(int x) {
