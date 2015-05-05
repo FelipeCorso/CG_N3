@@ -75,7 +75,6 @@ public final class ObjetoGrafico {
 		gl.glEnd();
 
 		// if (selecionado) {
-		bBox = new BBox(getListaPontos());
 		bBox.desenharBBox(gl);
 		// }
 

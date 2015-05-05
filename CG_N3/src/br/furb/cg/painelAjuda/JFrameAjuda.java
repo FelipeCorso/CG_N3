@@ -34,7 +34,7 @@ public class JFrameAjuda extends JFrame {
 	public JFrameAjuda() {
 		setTitle("Painel Ajuda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 476);
+		setBounds(100, 100, 294, 571);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -43,8 +43,6 @@ public class JFrameAjuda extends JFrame {
 		JPanelAjuda panel = new JPanelAjuda();
 		contentPane.add(panel, BorderLayout.CENTER);
 
-		// JPanelAjuda panelAjuda = new JPanelAjuda();
-		// add
 	}
 
 }

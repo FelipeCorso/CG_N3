@@ -11,6 +11,8 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.SwingUtilities;
 
+import br.furb.cg.painelAjuda.JFrameAjuda;
+import br.furb.cg.utils.BBox;
 import br.furb.cg.utils.Camera;
 import br.furb.cg.utils.Mundo;
 import br.furb.cg.utils.teclado.KeyMouseListener;
@@ -118,7 +120,7 @@ public class Main extends KeyMouseListener implements GLEventListener {
 
 	public void desenhaBBox() {
 		if (objetoGrafico != null) {
-			// objetoGrafico.getbBox().desenharBBox(gl);
+			objetoGrafico.setBBox(new BBox(objetoGrafico.getListaPontos()));
 		}
 	}
 
@@ -277,6 +279,19 @@ public class Main extends KeyMouseListener implements GLEventListener {
 				objetoGrafico = null;
 				pontoSelecionado = null;
 			}
+			break;
+		/*
+		 * Espaço - Remove seleção
+		 */
+		case KeyEvent.VK_SPACE:
+			objetoGrafico = null;
+			pontoSelecionado = null;
+			break;
+		/*
+		 * F1 - Abre o help
+		 */
+		case KeyEvent.VK_F1:
+			new JFrameAjuda().setVisible(true);
 			break;
 		}
 

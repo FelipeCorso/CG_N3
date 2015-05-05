@@ -21,7 +21,7 @@ public class JPanelAjuda extends JPanel {
 		setLayout(null);
 
 		JPanel panel_adicionar = new JPanel();
-		panel_adicionar.setBounds(0, 11, 270, 100);
+		panel_adicionar.setBounds(3, 11, 270, 164);
 		add(panel_adicionar);
 		panel_adicionar.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_adicionar.setLayout(null);
@@ -31,30 +31,33 @@ public class JPanelAjuda extends JPanel {
 		panel_adicionar.add(tglbtnAdicionar);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(1, 24, 268, 74);
+		panel.setBounds(5, 24, 229, 137);
 		panel_adicionar.add(panel);
-		panel.setLayout(null);
-
-		JLabel lblDesenharPoligono = new JLabel("Desenhar");
-		lblDesenharPoligono.setBounds(10, 8, 53, 28);
-		panel.add(lblDesenharPoligono);
-
-		JLabel lblExcluir = new JLabel("Excluir");
-		lblExcluir.setBounds(3, 54, 53, 14);
-		panel.add(lblExcluir);
-
-		JLabel lblImg = new JLabel("Tecla Del");
-		lblImg.setBounds(54, 54, 53, 14);
-		panel.add(lblImg);
-
-		JLabel label = new JLabel("");
-		label.setBounds(73, 8, 34, 45);
-		label.setIcon(new ImageIcon(getClass().getResource("..\\images\\Mouse Esquerda_45.png")));
-		panel.add(label);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		JLabel label_1 = new JLabel("Desenhar");
+		panel.add(label_1);
+		
+				JLabel label = new JLabel("");
+				label.setIcon(new ImageIcon(getClass().getResource("\\images\\Mouse Esquerda_45.png")));
+				panel.add(label);
+		
+				JLabel lblDesenharPoligono = new JLabel("Selecionar");
+				panel.add(lblDesenharPoligono);
+		
+		JLabel label_6 = new JLabel("");
+		label_6.setIcon(new ImageIcon(JPanelAjuda.class.getResource("/br/furb/cg/painelAjuda/images/Mouse Direita_45.png")));
+		panel.add(label_6);
+		
+		JLabel lblRemoverSeleo = new JLabel("Remover Sele\u00E7\u00E3o");
+		panel.add(lblRemoverSeleo);
+		
+		JLabel lblEspao = new JLabel("Espa\u00E7o");
+		panel.add(lblEspao);
 
 		JPanel panel_manipular = new JPanel();
 		panel_manipular.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_manipular.setBounds(0, 120, 270, 319);
+		panel_manipular.setBounds(3, 186, 270, 345);
 		add(panel_manipular);
 		panel_manipular.setLayout(new BorderLayout(0, 0));
 
@@ -119,70 +122,70 @@ public class JPanelAjuda extends JPanel {
 
 		JLabel lblB = new JLabel("B");
 		panel_2.add(lblB);
-		
+
 		JLabel lblZoomIn = new JLabel("Zoom In");
 		panel_2.add(lblZoomIn);
-		
+
 		JLabel lblMouseScrollUp = new JLabel("Mouse Scroll Up");
 		panel_2.add(lblMouseScrollUp);
-		
+
 		JLabel lblZoomOut = new JLabel("Zoom Out");
 		panel_2.add(lblZoomOut);
-		
+
 		JLabel lblMouseScrollDown = new JLabel("Mouse Scroll Down");
 		panel_2.add(lblMouseScrollDown);
-		
+
 		JLabel lblTranslaoParaCima = new JLabel("Transla\u00E7\u00E3o Cima");
 		panel_2.add(lblTranslaoParaCima);
-		
+
 		JLabel lblW = new JLabel("W");
 		panel_2.add(lblW);
-		
+
 		JLabel lblTranslaoParaBaixo = new JLabel("Transla\u00E7\u00E3o Baixo");
 		panel_2.add(lblTranslaoParaBaixo);
-		
+
 		JLabel lblS = new JLabel("S");
 		panel_2.add(lblS);
-		
+
 		JLabel lblTranslaoParaEsquerda = new JLabel("Transla\u00E7\u00E3o Esquerda");
 		panel_2.add(lblTranslaoParaEsquerda);
-		
+
 		JLabel lblA_1 = new JLabel("A");
 		panel_2.add(lblA_1);
-		
+
 		JLabel lblTranslaoParaDireita = new JLabel("Transla\u00E7\u00E3o Direita");
 		panel_2.add(lblTranslaoParaDireita);
-		
+
 		JLabel lblD = new JLabel("D");
 		panel_2.add(lblD);
-		
+
 		JLabel lblResetar = new JLabel("Resetar");
 		panel_2.add(lblResetar);
-		
+
 		JLabel lblR = new JLabel("R");
 		panel_2.add(lblR);
-		
+
 		JLabel lblAlterarPrimitiva = new JLabel("Alterar Primitiva");
 		panel_2.add(lblAlterarPrimitiva);
-		
+
 		JLabel lblP = new JLabel("P");
 		panel_2.add(lblP);
-		
+
 		JLabel lblAumentarEscala = new JLabel("Aumentar Escala");
 		panel_2.add(lblAumentarEscala);
-		
+
 		JLabel label_2 = new JLabel("+");
 		panel_2.add(label_2);
-		
+
 		JLabel lblDiminuirEscala = new JLabel("Diminuir Escala");
 		panel_2.add(lblDiminuirEscala);
-		
+
 		JLabel label_4 = new JLabel("-");
 		panel_2.add(label_4);
-		
+
 		JLabel lblRemoverObjeto = new JLabel("Remover Objeto");
 		panel_2.add(lblRemoverObjeto);
-		
+
 		JLabel lblDelete = new JLabel("Delete");
 		panel_2.add(lblDelete);
 	}
