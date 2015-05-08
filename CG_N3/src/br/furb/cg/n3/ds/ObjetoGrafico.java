@@ -74,9 +74,9 @@ public final class ObjetoGrafico {
 		}
 		gl.glEnd();
 
-		// if (selecionado) {
-		bBox.desenharBBox(gl);
-		// }
+		if (selecionado) {
+			bBox.desenharBBox(gl);
+		}
 
 		// ////////// ATENCAO: chamar desenho dos filhos...
 
@@ -111,13 +111,18 @@ public final class ObjetoGrafico {
 		Transformacao4D matrizTranslacao = new Transformacao4D();
 		Transformacao4D matrizRotacao = new Transformacao4D();
 		Transformacao4D matrizTranslacaoInversa = new Transformacao4D();
-		Ponto4D ponto = new Ponto4D(-getBBox().getCentroX(), -getBBox().getCentroY());
-		matrizTranslacao.atribuirTranslacao(ponto.getX(), ponto.getY(), ponto.getZ());
+		Ponto4D ponto = new Ponto4D(-getBBox().getCentroX(), -getBBox()
+				.getCentroY());
+		matrizTranslacao.atribuirTranslacao(ponto.getX(), ponto.getY(),
+				ponto.getZ());
 
 		matrizRotacao.atribuirRotacaoZ(Transformacao4D.DEG_TO_RAD * angulo);
 
-		Ponto4D pontoTranslacaoInversa = new Ponto4D(getBBox().getCentroX(), getBBox().getCentroY());
-		matrizTranslacaoInversa.atribuirTranslacao(pontoTranslacaoInversa.getX(), pontoTranslacaoInversa.getY(), pontoTranslacaoInversa.getZ());
+		Ponto4D pontoTranslacaoInversa = new Ponto4D(getBBox().getCentroX(),
+				getBBox().getCentroY());
+		matrizTranslacaoInversa.atribuirTranslacao(
+				pontoTranslacaoInversa.getX(), pontoTranslacaoInversa.getY(),
+				pontoTranslacaoInversa.getZ());
 
 		matrizGlobal = matrizTranslacao.transformMatrix(matrizGlobal);
 		matrizGlobal = matrizRotacao.transformMatrix(matrizGlobal);
@@ -135,14 +140,16 @@ public final class ObjetoGrafico {
 	public void escalaXYZPtoFixo(double escala, Ponto4D ptoFixo) {
 		matrizGlobal.atribuirIdentidade();
 
-		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.obterX(), ptoFixo.obterY(), ptoFixo.obterZ());
+		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.obterX(),
+				ptoFixo.obterY(), ptoFixo.obterZ());
 		matrizGlobal = matrizTmpTranslacao.transformMatrix(matrizGlobal);
 
 		matrizTmpEscala.atribuirEscala(escala, escala, 1.0);
 		matrizGlobal = matrizTmpEscala.transformMatrix(matrizGlobal);
 
 		ptoFixo.inverterSinal(ptoFixo);
-		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.obterX(), ptoFixo.obterY(), ptoFixo.obterZ());
+		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.obterX(),
+				ptoFixo.obterY(), ptoFixo.obterZ());
 		matrizGlobal = matrizTmpTranslacaoInversa.transformMatrix(matrizGlobal);
 
 		matrizObjeto = matrizObjeto.transformMatrix(matrizGlobal);
@@ -151,14 +158,16 @@ public final class ObjetoGrafico {
 	public void rotacaoZPtoFixo(double angulo, Ponto4D ptoFixo) {
 		matrizGlobal.atribuirIdentidade();
 
-		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.obterX(), ptoFixo.obterY(), ptoFixo.obterZ());
+		matrizTmpTranslacao.atribuirTranslacao(ptoFixo.obterX(),
+				ptoFixo.obterY(), ptoFixo.obterZ());
 		matrizGlobal = matrizTmpTranslacao.transformMatrix(matrizGlobal);
 
 		matrizTmpEscala.atribuirRotacaoZ(Transformacao4D.DEG_TO_RAD * angulo);
 		matrizGlobal = matrizTmpEscala.transformMatrix(matrizGlobal);
 
 		ptoFixo.inverterSinal(ptoFixo);
-		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.obterX(), ptoFixo.obterY(), ptoFixo.obterZ());
+		matrizTmpTranslacaoInversa.atribuirTranslacao(ptoFixo.obterX(),
+				ptoFixo.obterY(), ptoFixo.obterZ());
 		matrizGlobal = matrizTmpTranslacaoInversa.transformMatrix(matrizGlobal);
 
 		matrizObjeto = matrizObjeto.transformMatrix(matrizGlobal);
@@ -193,8 +202,10 @@ public final class ObjetoGrafico {
 	}
 
 	public ObjetoGrafico selecionaObjeto(Ponto4D ponto) {
+		selecionado = false;
 		if (getBBox().dentroBBox(ponto.getX(), ponto.getY())) {
 			if (ScanLine.pontoDoPoligono(getListaPontos(), ponto)) {
+				selecionado = true;
 				return this;
 			}
 		}
