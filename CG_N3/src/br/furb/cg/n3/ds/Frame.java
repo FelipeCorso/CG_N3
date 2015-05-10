@@ -1,8 +1,6 @@
 package br.furb.cg.n3.ds;
 
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
@@ -11,19 +9,23 @@ import javax.swing.WindowConstants;
 
 import br.furb.cg.painelAjuda.JFrameAjuda;
 
-public class Frame extends JFrame implements KeyListener {
+public class Frame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private Main renderer = new Main();
+	private Main renderer;
 	private int janelaLargura = 400, janelaAltura = 400;
+	private JFrameAjuda frameAjuda;
 
 	public Frame() {
 		// Cria o frame.
-		super("CG-N3_Trasnformacao");
-		setTitle("CG-N3 - F1 Help");
+		super("CG_N3 - F1 Help");
 		setBounds(300, 250, janelaLargura, janelaAltura + 22);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
+
+		frameAjuda = new JFrameAjuda();
+		frameAjuda.setVisible(true);
+		renderer = new Main(frameAjuda.getPanelAjuda());
 
 		/*
 		 * Cria um objeto GLCapabilities para especificar o numero de bits por pixel para RGBA
@@ -46,8 +48,6 @@ public class Frame extends JFrame implements KeyListener {
 		canvas.addMouseWheelListener(renderer);
 		canvas.requestFocus();
 
-		// Para o F1
-		addKeyListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -55,26 +55,9 @@ public class Frame extends JFrame implements KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		/*
-		 * F1 - Abre o help
-		 */
-		case KeyEvent.VK_F1:
-			new JFrameAjuda().setVisible(true);
-			break;
-		}
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-
+	public void dispose() {
+		frameAjuda.dispose();
+		super.dispose();
 	}
 
 }

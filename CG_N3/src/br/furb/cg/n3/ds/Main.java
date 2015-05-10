@@ -11,7 +11,7 @@ import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 import javax.swing.SwingUtilities;
 
-import br.furb.cg.painelAjuda.JFrameAjuda;
+import br.furb.cg.painelAjuda.JPanelAjuda;
 import br.furb.cg.utils.BBox;
 import br.furb.cg.utils.Camera;
 import br.furb.cg.utils.Mundo;
@@ -41,10 +41,18 @@ public class Main extends KeyMouseListener implements GLEventListener {
 	private int antigoX = 0;
 	private int antigoY = 0;
 
-	private ObjetoGrafico[] objetos = null;
+	private boolean desenharRastro;
+	// private ObjetoGrafico objetoGrafico = new ObjetoGrafico();
+	private ObjetoGrafico objetoGrafico;
+	private double ultimoX;
+	private double ultimoY;
+	private int atualX;
+	private int atualY;
+	private JPanelAjuda panelAjuda;
 
-	public Main() {
-		mundo.adicionarObjGrafico(objetoGrafico);
+	public Main(JPanelAjuda frameAjuda) {
+		// mundo.adicionarObjGrafico(objetoGrafico);
+		panelAjuda = frameAjuda;
 	}
 
 	// "render" feito logo apos a inicializacao do contexto OpenGL.
@@ -100,11 +108,12 @@ public class Main extends KeyMouseListener implements GLEventListener {
 		desenhaPonto();
 		desenhaObjetosMundo();
 		desenhaBBox();
+		desenhaRastro();
 
 		gl.glFlush();
 	}
 
-	public void desenhaPonto() {
+	private void desenhaPonto() {
 		if (pontoSelecionado != null) {
 			gl.glColor3f(1, 0, 0);
 			gl.glPointSize(3);
@@ -114,17 +123,26 @@ public class Main extends KeyMouseListener implements GLEventListener {
 		}
 	}
 
-	public void desenhaObjetosMundo() {
+	private void desenhaObjetosMundo() {
 		mundo.desenha(gl);
 	}
 
-	public void desenhaBBox() {
+	private void desenhaBBox() {
 		if (objetoGrafico != null) {
 			objetoGrafico.setBBox(new BBox(objetoGrafico.getListaPontos()));
 		}
 	}
 
-	public void desenhaSRU() {
+	private void desenhaRastro() {
+		if (desenharRastro) {
+			gl.glBegin(GL.GL_LINES);
+			gl.glVertex2d(ultimoX, ultimoY);
+			gl.glVertex2d(atualX, atualY);
+			gl.glEnd();
+		}
+	}
+
+	private void desenhaSRU() {
 		// gl.glColor3f(1.0f, 0.0f, 0.0f);
 		// gl.glBegin(GL.GL_LINES);
 		// /**/gl.glVertex2f(-20.0f, 0.0f);
@@ -278,21 +296,10 @@ public class Main extends KeyMouseListener implements GLEventListener {
 				mundo.removeObjGrafico(objetoGrafico);
 				objetoGrafico = null;
 				pontoSelecionado = null;
+				desenharRastro = false;
 			}
 			break;
-		/*
-		 * Espaço - Remove seleção
-		 */
-		case KeyEvent.VK_SPACE:
-			objetoGrafico = null;
-			pontoSelecionado = null;
-			break;
-		/*
-		 * F1 - Abre o help
-		 */
-		case KeyEvent.VK_F1:
-			new JFrameAjuda().setVisible(true);
-			break;
+
 		}
 
 		glDrawable.display();
@@ -313,31 +320,58 @@ public class Main extends KeyMouseListener implements GLEventListener {
 		// System.out.println(" --- displayChanged ---");
 	}
 
-	private ObjetoGrafico objetoGrafico = new ObjetoGrafico();
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		if (SwingUtilities.isLeftMouseButton(e)) {
-			if (objetoGrafico != null) {
-				Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
-				pontoSelecionado = ponto;
-				objetoGrafico.addPonto(ponto);
-			}
-		} else {
-			if (SwingUtilities.isRightMouseButton(e)) {
-				Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
-				objetoGrafico = mundo.selecionaObjGrafico(ponto);
+		if (panelAjuda.isAdicionarEnabled()) {
+			if (SwingUtilities.isLeftMouseButton(e)) {
 				if (objetoGrafico != null) {
-					pontoSelecionado = objetoGrafico.selecionaPonto(ponto);
+					Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
+					pontoSelecionado = ponto;
+					objetoGrafico.addPonto(ponto);
+					ultimoX = ponto.obterX();
+					ultimoY = ponto.obterY();
+					desenharRastro = true;
+				}
+			} else {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					desenharRastro = false;
+					objetoGrafico = null;
+					pontoSelecionado = null;
 				}
 			}
+
+		} else {
+			if (panelAjuda.isManipularEnabled()) {
+				if (SwingUtilities.isLeftMouseButton(e)) {
+					Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
+					objetoGrafico = mundo.selecionaObjGrafico(ponto);
+					if (objetoGrafico != null) {
+						pontoSelecionado = objetoGrafico.selecionaPonto(ponto);
+					}
+				} else {
+					if (SwingUtilities.isRightMouseButton(e)) {
+						objetoGrafico = null;
+						pontoSelecionado = null;
+					}
+				}
+
+			}
 		}
+
 		glDrawable.display();
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+
+		atualX = e.getX();
+		atualY = e.getY();
+
+		if (glDrawable != null) {
+			glDrawable.display();
+		}
 
 		// System.out.println("getAntigoX(): " + getAntigoX());
 		// System.out.println("getAntigoY(): " + getAntigoY());

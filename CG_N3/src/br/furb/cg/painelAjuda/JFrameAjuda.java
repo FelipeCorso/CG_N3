@@ -9,7 +9,9 @@ import javax.swing.border.EmptyBorder;
 
 public class JFrameAjuda extends JFrame {
 
+	private static final long serialVersionUID = 2028546175861047326L;
 	private JPanel contentPane;
+	private JPanelAjuda panelAjuda;
 
 	/**
 	 * Launch the application.
@@ -34,15 +36,19 @@ public class JFrameAjuda extends JFrame {
 	public JFrameAjuda() {
 		setTitle("Painel Ajuda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 294, 571);
+		setBounds(100, 100, 320, 571);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JPanelAjuda panel = new JPanelAjuda();
-		contentPane.add(panel, BorderLayout.CENTER);
+		panelAjuda = new JPanelAjuda();
+		contentPane.add(panelAjuda, BorderLayout.CENTER);
 
+	}
+
+	public JPanelAjuda getPanelAjuda() {
+		return panelAjuda;
 	}
 
 }

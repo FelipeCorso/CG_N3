@@ -3,6 +3,8 @@ package br.furb.cg.painelAjuda;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -11,8 +13,13 @@ import javax.swing.JToggleButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.BoxLayout;
 
 public class JPanelAjuda extends JPanel {
+
+	private static final long serialVersionUID = 4275319781157386639L;
+	private JToggleButton tglbtnAdicionar;
+	private JToggleButton tglbtnManipular;
 
 	/**
 	 * Create the panel.
@@ -21,173 +28,215 @@ public class JPanelAjuda extends JPanel {
 		setLayout(null);
 
 		JPanel panel_adicionar = new JPanel();
-		panel_adicionar.setBounds(3, 11, 270, 164);
+		panel_adicionar.setBounds(6, 11, 287, 86);
 		add(panel_adicionar);
 		panel_adicionar.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_adicionar.setLayout(null);
+		panel_adicionar.setLayout(new BorderLayout(0, 0));
 
-		JToggleButton tglbtnAdicionar = new JToggleButton("Adicionar");
-		tglbtnAdicionar.setBounds(1, 1, 269, 23);
-		panel_adicionar.add(tglbtnAdicionar);
+		tglbtnAdicionar = new JToggleButton("Adicionar");
+		panel_adicionar.add(tglbtnAdicionar, BorderLayout.NORTH);
+		tglbtnAdicionar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				setManipularEnabled(false);
+			}
+		});
 
-		JPanel panel = new JPanel();
-		panel.setBounds(5, 24, 229, 137);
-		panel_adicionar.add(panel);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		
+		JPanel funcoesAdicionar = new JPanel();
+		funcoesAdicionar.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0,
+				0), null));
+
+		funcoesAdicionar.setLayout(new GridLayout(3, 2, -100, 0));
+
+		JLabel lblRemoverSeleo = new JLabel("Novo");
+		funcoesAdicionar.add(lblRemoverSeleo);
+
+		JLabel lblEspao = new JLabel("Insert");
+		funcoesAdicionar.add(lblEspao);
+
 		JLabel label_1 = new JLabel("Desenhar");
-		panel.add(label_1);
-		
-				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(getClass().getResource("\\images\\Mouse Esquerda_45.png")));
-				panel.add(label);
-		
-				JLabel lblDesenharPoligono = new JLabel("Selecionar");
-				panel.add(lblDesenharPoligono);
-		
-		JLabel label_6 = new JLabel("");
-		label_6.setIcon(new ImageIcon(JPanelAjuda.class.getResource("/br/furb/cg/painelAjuda/images/Mouse Direita_45.png")));
-		panel.add(label_6);
-		
-		JLabel lblRemoverSeleo = new JLabel("Remover Sele\u00E7\u00E3o");
-		panel.add(lblRemoverSeleo);
-		
-		JLabel lblEspao = new JLabel("Espa\u00E7o");
-		panel.add(lblEspao);
+		funcoesAdicionar.add(label_1);
+
+		JLabel lblMouseBotoEsquerdo = new JLabel("Mouse Bot\u00E3o Esquerdo");
+		funcoesAdicionar.add(lblMouseBotoEsquerdo);
+
+		JLabel lblDesenharPoligono = new JLabel("Concluir");
+		funcoesAdicionar.add(lblDesenharPoligono);
+
+		JLabel lblMouseBotoDireito = new JLabel("Mouse Bot\u00E3o Direito");
+		funcoesAdicionar.add(lblMouseBotoDireito);
+		panel_adicionar.add(funcoesAdicionar, BorderLayout.CENTER);
 
 		JPanel panel_manipular = new JPanel();
 		panel_manipular.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_manipular.setBounds(3, 186, 270, 345);
+		panel_manipular.setBounds(3, 108, 290, 423);
 		add(panel_manipular);
 		panel_manipular.setLayout(new BorderLayout(0, 0));
 
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("Manipular");
-		panel_manipular.add(tglbtnNewToggleButton, BorderLayout.NORTH);
+		tglbtnManipular = new JToggleButton("Manipular");
+		tglbtnManipular.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				setAdicionarEnabled(false);
+			}
+		});
+		panel_manipular.add(tglbtnManipular, BorderLayout.NORTH);
 
-		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0, 0), null));
-		panel_manipular.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+		JPanel funcoesManipular = new JPanel();
+		funcoesManipular.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0,
+				0), null));
+		panel_manipular.add(funcoesManipular, BorderLayout.CENTER);
+		funcoesManipular.setLayout(new GridLayout(0, 2, 0, 0));
+
+		JLabel lblSelecionar = new JLabel("Selecionar");
+		funcoesManipular.add(lblSelecionar);
+
+		JLabel lblMouseBotoEsquerdo_1 = new JLabel("Mouse Bot\u00E3o Esquerdo");
+		funcoesManipular.add(lblMouseBotoEsquerdo_1);
+
+		JLabel lblRemoverSeleo_1 = new JLabel("Remover Sele\u00E7\u00E3o");
+		funcoesManipular.add(lblRemoverSeleo_1);
+
+		JLabel label_3 = new JLabel("Mouse Bot\u00E3o Direito");
+		funcoesManipular.add(label_3);
 
 		JLabel lblUp = new JLabel("Mover para cima");
-		panel_2.add(lblUp);
+		funcoesManipular.add(lblUp);
 
 		JLabel lblUp_1 = new JLabel("UP");
-		panel_2.add(lblUp_1);
+		funcoesManipular.add(lblUp_1);
 
 		JLabel lblMoverParaBaixo = new JLabel("Mover para baixo");
-		panel_2.add(lblMoverParaBaixo);
+		funcoesManipular.add(lblMoverParaBaixo);
 
 		JLabel lblDown = new JLabel("Down");
-		panel_2.add(lblDown);
+		funcoesManipular.add(lblDown);
 
 		JLabel lblMoverParaEsquerda = new JLabel("Mover para esquerda");
-		panel_2.add(lblMoverParaEsquerda);
+		funcoesManipular.add(lblMoverParaEsquerda);
 
 		JLabel lblLeft = new JLabel("Left");
-		panel_2.add(lblLeft);
+		funcoesManipular.add(lblLeft);
 
 		JLabel lblMoverParaDireita = new JLabel("Mover para direita");
-		panel_2.add(lblMoverParaDireita);
+		funcoesManipular.add(lblMoverParaDireita);
 
 		JLabel lblRight = new JLabel("Right");
-		panel_2.add(lblRight);
+		funcoesManipular.add(lblRight);
 
 		JLabel lblRotacionarDireita = new JLabel("Rotacionar Hor\u00E1rio");
-		panel_2.add(lblRotacionarDireita);
+		funcoesManipular.add(lblRotacionarDireita);
 
 		JLabel lblRightUp = new JLabel("E");
-		panel_2.add(lblRightUp);
+		funcoesManipular.add(lblRightUp);
 
-		JLabel lblRotacionarEsquerda = new JLabel("Rotacionar Anti-hor\u00E1rio");
-		panel_2.add(lblRotacionarEsquerda);
+		JLabel lblRotacionarEsquerda = new JLabel(
+				"Rotacionar Anti-hor\u00E1rio");
+		funcoesManipular.add(lblRotacionarEsquerda);
 
 		JLabel lblLeftUp = new JLabel("Q");
-		panel_2.add(lblLeftUp);
+		funcoesManipular.add(lblLeftUp);
 
 		JLabel lblDefinirCorVermelha = new JLabel("Definir Cor Vermelha");
-		panel_2.add(lblDefinirCorVermelha);
+		funcoesManipular.add(lblDefinirCorVermelha);
 
 		JLabel lblV = new JLabel("R");
-		panel_2.add(lblV);
+		funcoesManipular.add(lblV);
 
 		JLabel lblDefinirCorAzul = new JLabel("Definir Cor Azul");
-		panel_2.add(lblDefinirCorAzul);
+		funcoesManipular.add(lblDefinirCorAzul);
 
 		JLabel lblA = new JLabel("G");
-		panel_2.add(lblA);
+		funcoesManipular.add(lblA);
 
 		JLabel lblDefinirCorVerde = new JLabel("Definir Cor Verde");
-		panel_2.add(lblDefinirCorVerde);
+		funcoesManipular.add(lblDefinirCorVerde);
 
 		JLabel lblB = new JLabel("B");
-		panel_2.add(lblB);
+		funcoesManipular.add(lblB);
 
 		JLabel lblZoomIn = new JLabel("Zoom In");
-		panel_2.add(lblZoomIn);
+		funcoesManipular.add(lblZoomIn);
 
 		JLabel lblMouseScrollUp = new JLabel("Mouse Scroll Up");
-		panel_2.add(lblMouseScrollUp);
+		funcoesManipular.add(lblMouseScrollUp);
 
 		JLabel lblZoomOut = new JLabel("Zoom Out");
-		panel_2.add(lblZoomOut);
+		funcoesManipular.add(lblZoomOut);
 
 		JLabel lblMouseScrollDown = new JLabel("Mouse Scroll Down");
-		panel_2.add(lblMouseScrollDown);
+		funcoesManipular.add(lblMouseScrollDown);
 
 		JLabel lblTranslaoParaCima = new JLabel("Transla\u00E7\u00E3o Cima");
-		panel_2.add(lblTranslaoParaCima);
+		funcoesManipular.add(lblTranslaoParaCima);
 
 		JLabel lblW = new JLabel("W");
-		panel_2.add(lblW);
+		funcoesManipular.add(lblW);
 
 		JLabel lblTranslaoParaBaixo = new JLabel("Transla\u00E7\u00E3o Baixo");
-		panel_2.add(lblTranslaoParaBaixo);
+		funcoesManipular.add(lblTranslaoParaBaixo);
 
 		JLabel lblS = new JLabel("S");
-		panel_2.add(lblS);
+		funcoesManipular.add(lblS);
 
-		JLabel lblTranslaoParaEsquerda = new JLabel("Transla\u00E7\u00E3o Esquerda");
-		panel_2.add(lblTranslaoParaEsquerda);
+		JLabel lblTranslaoParaEsquerda = new JLabel(
+				"Transla\u00E7\u00E3o Esquerda");
+		funcoesManipular.add(lblTranslaoParaEsquerda);
 
 		JLabel lblA_1 = new JLabel("A");
-		panel_2.add(lblA_1);
+		funcoesManipular.add(lblA_1);
 
-		JLabel lblTranslaoParaDireita = new JLabel("Transla\u00E7\u00E3o Direita");
-		panel_2.add(lblTranslaoParaDireita);
+		JLabel lblTranslaoParaDireita = new JLabel(
+				"Transla\u00E7\u00E3o Direita");
+		funcoesManipular.add(lblTranslaoParaDireita);
 
 		JLabel lblD = new JLabel("D");
-		panel_2.add(lblD);
+		funcoesManipular.add(lblD);
 
 		JLabel lblResetar = new JLabel("Resetar");
-		panel_2.add(lblResetar);
+		funcoesManipular.add(lblResetar);
 
 		JLabel lblR = new JLabel("R");
-		panel_2.add(lblR);
+		funcoesManipular.add(lblR);
 
 		JLabel lblAlterarPrimitiva = new JLabel("Alterar Primitiva");
-		panel_2.add(lblAlterarPrimitiva);
+		funcoesManipular.add(lblAlterarPrimitiva);
 
 		JLabel lblP = new JLabel("P");
-		panel_2.add(lblP);
+		funcoesManipular.add(lblP);
 
 		JLabel lblAumentarEscala = new JLabel("Aumentar Escala");
-		panel_2.add(lblAumentarEscala);
+		funcoesManipular.add(lblAumentarEscala);
 
 		JLabel label_2 = new JLabel("+");
-		panel_2.add(label_2);
+		funcoesManipular.add(label_2);
 
 		JLabel lblDiminuirEscala = new JLabel("Diminuir Escala");
-		panel_2.add(lblDiminuirEscala);
+		funcoesManipular.add(lblDiminuirEscala);
 
 		JLabel label_4 = new JLabel("-");
-		panel_2.add(label_4);
+		funcoesManipular.add(label_4);
 
 		JLabel lblRemoverObjeto = new JLabel("Remover Objeto");
-		panel_2.add(lblRemoverObjeto);
+		funcoesManipular.add(lblRemoverObjeto);
 
 		JLabel lblDelete = new JLabel("Delete");
-		panel_2.add(lblDelete);
+		funcoesManipular.add(lblDelete);
 	}
 
+	public boolean isAdicionarEnabled() {
+		return tglbtnAdicionar.isSelected();
+	}
+
+	public void setAdicionarEnabled(boolean enable) {
+		tglbtnAdicionar.setSelected(enable);
+	}
+
+	public boolean isManipularEnabled() {
+		return tglbtnManipular.isSelected();
+	}
+
+	public void setManipularEnabled(boolean enable) {
+		tglbtnManipular.setSelected(enable);
+	}
 }
