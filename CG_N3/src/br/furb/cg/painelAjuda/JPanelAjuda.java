@@ -6,14 +6,12 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.BoxLayout;
 
 public class JPanelAjuda extends JPanel {
 
@@ -43,8 +41,7 @@ public class JPanelAjuda extends JPanel {
 		});
 
 		JPanel funcoesAdicionar = new JPanel();
-		funcoesAdicionar.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0,
-				0), null));
+		funcoesAdicionar.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0, 0), null));
 
 		funcoesAdicionar.setLayout(new GridLayout(3, 2, -100, 0));
 
@@ -83,8 +80,7 @@ public class JPanelAjuda extends JPanel {
 		panel_manipular.add(tglbtnManipular, BorderLayout.NORTH);
 
 		JPanel funcoesManipular = new JPanel();
-		funcoesManipular.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0,
-				0), null));
+		funcoesManipular.setBorder(new CompoundBorder(new EmptyBorder(0, 5, 0, 0), null));
 		panel_manipular.add(funcoesManipular, BorderLayout.CENTER);
 		funcoesManipular.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -130,8 +126,7 @@ public class JPanelAjuda extends JPanel {
 		JLabel lblRightUp = new JLabel("E");
 		funcoesManipular.add(lblRightUp);
 
-		JLabel lblRotacionarEsquerda = new JLabel(
-				"Rotacionar Anti-hor\u00E1rio");
+		JLabel lblRotacionarEsquerda = new JLabel("Rotacionar Anti-hor\u00E1rio");
 		funcoesManipular.add(lblRotacionarEsquerda);
 
 		JLabel lblLeftUp = new JLabel("Q");
@@ -179,15 +174,13 @@ public class JPanelAjuda extends JPanel {
 		JLabel lblS = new JLabel("S");
 		funcoesManipular.add(lblS);
 
-		JLabel lblTranslaoParaEsquerda = new JLabel(
-				"Transla\u00E7\u00E3o Esquerda");
+		JLabel lblTranslaoParaEsquerda = new JLabel("Transla\u00E7\u00E3o Esquerda");
 		funcoesManipular.add(lblTranslaoParaEsquerda);
 
 		JLabel lblA_1 = new JLabel("A");
 		funcoesManipular.add(lblA_1);
 
-		JLabel lblTranslaoParaDireita = new JLabel(
-				"Transla\u00E7\u00E3o Direita");
+		JLabel lblTranslaoParaDireita = new JLabel("Transla\u00E7\u00E3o Direita");
 		funcoesManipular.add(lblTranslaoParaDireita);
 
 		JLabel lblD = new JLabel("D");

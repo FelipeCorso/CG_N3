@@ -335,8 +335,9 @@ public class Main extends KeyMouseListener implements GLEventListener {
 				}
 			} else {
 				if (SwingUtilities.isRightMouseButton(e)) {
-					desenharRastro = false;
+					objetoGrafico.setSelecionado(false);
 					objetoGrafico = null;
+					desenharRastro = false;
 					pontoSelecionado = null;
 				}
 			}
@@ -348,6 +349,8 @@ public class Main extends KeyMouseListener implements GLEventListener {
 					objetoGrafico = mundo.selecionaObjGrafico(ponto);
 					if (objetoGrafico != null) {
 						pontoSelecionado = objetoGrafico.selecionaPonto(ponto);
+					} else {
+						pontoSelecionado = null;
 					}
 				} else {
 					if (SwingUtilities.isRightMouseButton(e)) {

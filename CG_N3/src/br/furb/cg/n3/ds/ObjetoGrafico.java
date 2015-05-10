@@ -78,7 +78,10 @@ public final class ObjetoGrafico {
 			bBox.desenharBBox(gl);
 		}
 
-		// ////////// ATENCAO: chamar desenho dos filhos...
+		for (ObjetoGrafico objetoGrafico : listaObjGraficos) {
+			objetoGrafico.atribuirGL(gl);
+			objetoGrafico.desenha();
+		}
 
 		gl.glPopMatrix();
 	}
@@ -246,6 +249,14 @@ public final class ObjetoGrafico {
 
 	public List<ObjetoGrafico> getListaObjGraficos() {
 		return listaObjGraficos;
+	}
+
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(boolean selecionado) {
+		this.selecionado = selecionado;
 	}
 
 }
