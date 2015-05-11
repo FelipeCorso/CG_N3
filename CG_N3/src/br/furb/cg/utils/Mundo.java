@@ -16,8 +16,11 @@ public class Mundo {
 	}
 
 	public void removeObjGrafico(ObjetoGrafico objGrafico) {
-		if (!getListaObjGrafico().remove(objGrafico)) {
-			objGrafico.removeObjGrafico(objGrafico);
+		if (getListaObjGrafico().contains(objGrafico)) {
+			getListaObjGrafico().remove(objGrafico);
+		} else {
+			for (ObjetoGrafico objeto : getListaObjGrafico())
+				objeto.removeObjGrafico(objGrafico);
 		}
 	}
 

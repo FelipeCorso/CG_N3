@@ -346,6 +346,12 @@ public class Main extends KeyMouseListener implements GLEventListener {
 			if (panelAjuda.isManipularEnabled()) {
 				if (SwingUtilities.isLeftMouseButton(e)) {
 					Ponto4D ponto = new Ponto4D(e.getX(), e.getY());
+
+					// Tira a seleção do objeto atual, para não ficarem dois selecionados
+					if (objetoGrafico != null) {
+						objetoGrafico.setSelecionado(false);
+					}
+
 					objetoGrafico = mundo.selecionaObjGrafico(ponto);
 					if (objetoGrafico != null) {
 						pontoSelecionado = objetoGrafico.selecionaPonto(ponto);
@@ -354,7 +360,10 @@ public class Main extends KeyMouseListener implements GLEventListener {
 					}
 				} else {
 					if (SwingUtilities.isRightMouseButton(e)) {
-						objetoGrafico = null;
+						if (objetoGrafico != null) {
+							objetoGrafico.setSelecionado(false);
+							objetoGrafico = null;
+						}
 						pontoSelecionado = null;
 					}
 				}
