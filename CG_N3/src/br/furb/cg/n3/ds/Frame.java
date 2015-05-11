@@ -18,7 +18,7 @@ public class Frame extends JFrame {
 
 	public Frame() {
 		// Cria o frame.
-		super("CG_N3 - F1 Help");
+		super("CG_N3 - Carlos Muller, Felipe Corso");
 		setBounds(300, 250, janelaLargura, janelaAltura + 22);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());

@@ -95,6 +95,18 @@ public class JPanelAjuda extends JPanel {
 
 		JLabel label_3 = new JLabel("Mouse Bot\u00E3o Direito");
 		funcoesManipular.add(label_3);
+		
+				JLabel lblRemoverObjeto = new JLabel("Remover Objeto");
+				funcoesManipular.add(lblRemoverObjeto);
+		
+				JLabel lblDelete = new JLabel("Delete");
+				funcoesManipular.add(lblDelete);
+		
+				JLabel lblResetar = new JLabel("Resetar");
+				funcoesManipular.add(lblResetar);
+		
+				JLabel lblR = new JLabel("R");
+				funcoesManipular.add(lblR);
 
 		JLabel lblUp = new JLabel("Mover para cima");
 		funcoesManipular.add(lblUp);
@@ -119,6 +131,30 @@ public class JPanelAjuda extends JPanel {
 
 		JLabel lblRight = new JLabel("Right");
 		funcoesManipular.add(lblRight);
+		
+				JLabel lblTranslaoParaCima = new JLabel("Transla\u00E7\u00E3o Cima");
+				funcoesManipular.add(lblTranslaoParaCima);
+		
+				JLabel lblW = new JLabel("W");
+				funcoesManipular.add(lblW);
+		
+				JLabel lblTranslaoParaBaixo = new JLabel("Transla\u00E7\u00E3o Baixo");
+				funcoesManipular.add(lblTranslaoParaBaixo);
+		
+				JLabel lblS = new JLabel("S");
+				funcoesManipular.add(lblS);
+		
+				JLabel lblTranslaoParaEsquerda = new JLabel("Transla\u00E7\u00E3o Esquerda");
+				funcoesManipular.add(lblTranslaoParaEsquerda);
+		
+				JLabel lblA_1 = new JLabel("A");
+				funcoesManipular.add(lblA_1);
+		
+				JLabel lblTranslaoParaDireita = new JLabel("Transla\u00E7\u00E3o Direita");
+				funcoesManipular.add(lblTranslaoParaDireita);
+		
+				JLabel lblD = new JLabel("D");
+				funcoesManipular.add(lblD);
 
 		JLabel lblRotacionarDireita = new JLabel("Rotacionar Hor\u00E1rio");
 		funcoesManipular.add(lblRotacionarDireita);
@@ -131,66 +167,18 @@ public class JPanelAjuda extends JPanel {
 
 		JLabel lblLeftUp = new JLabel("Q");
 		funcoesManipular.add(lblLeftUp);
-
-		JLabel lblDefinirCorVermelha = new JLabel("Definir Cor Vermelha");
-		funcoesManipular.add(lblDefinirCorVermelha);
-
-		JLabel lblV = new JLabel("R");
-		funcoesManipular.add(lblV);
-
-		JLabel lblDefinirCorAzul = new JLabel("Definir Cor Azul");
-		funcoesManipular.add(lblDefinirCorAzul);
-
-		JLabel lblA = new JLabel("G");
-		funcoesManipular.add(lblA);
-
-		JLabel lblDefinirCorVerde = new JLabel("Definir Cor Verde");
-		funcoesManipular.add(lblDefinirCorVerde);
-
-		JLabel lblB = new JLabel("B");
-		funcoesManipular.add(lblB);
-
-		JLabel lblZoomIn = new JLabel("Zoom In");
-		funcoesManipular.add(lblZoomIn);
-
-		JLabel lblMouseScrollUp = new JLabel("Mouse Scroll Up");
-		funcoesManipular.add(lblMouseScrollUp);
-
-		JLabel lblZoomOut = new JLabel("Zoom Out");
-		funcoesManipular.add(lblZoomOut);
-
-		JLabel lblMouseScrollDown = new JLabel("Mouse Scroll Down");
-		funcoesManipular.add(lblMouseScrollDown);
-
-		JLabel lblTranslaoParaCima = new JLabel("Transla\u00E7\u00E3o Cima");
-		funcoesManipular.add(lblTranslaoParaCima);
-
-		JLabel lblW = new JLabel("W");
-		funcoesManipular.add(lblW);
-
-		JLabel lblTranslaoParaBaixo = new JLabel("Transla\u00E7\u00E3o Baixo");
-		funcoesManipular.add(lblTranslaoParaBaixo);
-
-		JLabel lblS = new JLabel("S");
-		funcoesManipular.add(lblS);
-
-		JLabel lblTranslaoParaEsquerda = new JLabel("Transla\u00E7\u00E3o Esquerda");
-		funcoesManipular.add(lblTranslaoParaEsquerda);
-
-		JLabel lblA_1 = new JLabel("A");
-		funcoesManipular.add(lblA_1);
-
-		JLabel lblTranslaoParaDireita = new JLabel("Transla\u00E7\u00E3o Direita");
-		funcoesManipular.add(lblTranslaoParaDireita);
-
-		JLabel lblD = new JLabel("D");
-		funcoesManipular.add(lblD);
-
-		JLabel lblResetar = new JLabel("Resetar");
-		funcoesManipular.add(lblResetar);
-
-		JLabel lblR = new JLabel("R");
-		funcoesManipular.add(lblR);
+		
+				JLabel lblZoomIn = new JLabel("Zoom In");
+				funcoesManipular.add(lblZoomIn);
+		
+				JLabel lblMouseScrollUp = new JLabel("Mouse Scroll Up");
+				funcoesManipular.add(lblMouseScrollUp);
+		
+				JLabel lblZoomOut = new JLabel("Zoom Out");
+				funcoesManipular.add(lblZoomOut);
+		
+				JLabel lblMouseScrollDown = new JLabel("Mouse Scroll Down");
+				funcoesManipular.add(lblMouseScrollDown);
 
 		JLabel lblAlterarPrimitiva = new JLabel("Alterar Primitiva");
 		funcoesManipular.add(lblAlterarPrimitiva);
@@ -209,12 +197,24 @@ public class JPanelAjuda extends JPanel {
 
 		JLabel label_4 = new JLabel("-");
 		funcoesManipular.add(label_4);
-
-		JLabel lblRemoverObjeto = new JLabel("Remover Objeto");
-		funcoesManipular.add(lblRemoverObjeto);
-
-		JLabel lblDelete = new JLabel("Delete");
-		funcoesManipular.add(lblDelete);
+		
+				JLabel lblDefinirCorVermelha = new JLabel("Definir Cor Vermelha");
+				funcoesManipular.add(lblDefinirCorVermelha);
+				
+						JLabel lblV = new JLabel("V");
+						funcoesManipular.add(lblV);
+						
+								JLabel lblDefinirCorAzul = new JLabel("Definir Cor Azul");
+								funcoesManipular.add(lblDefinirCorAzul);
+								
+										JLabel lblA = new JLabel("G");
+										funcoesManipular.add(lblA);
+										
+												JLabel lblDefinirCorVerde = new JLabel("Definir Cor Verde");
+												funcoesManipular.add(lblDefinirCorVerde);
+												
+														JLabel lblB = new JLabel("B");
+														funcoesManipular.add(lblB);
 	}
 
 	public boolean isAdicionarEnabled() {

@@ -1,5 +1,6 @@
 package br.furb.cg.n3.ds;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public final class ObjetoGrafico {
 	private static Transformacao4D matrizGlobal = new Transformacao4D();
 	private List<ObjetoGrafico> listaObjGraficos = new LinkedList<>();
 
+	private Color cor = Color.BLACK;
+
 	// private double anguloGlobal = 0.0;
 
 	public ObjetoGrafico() {
@@ -59,7 +62,7 @@ public final class ObjetoGrafico {
 	}
 
 	public void desenha() {
-		gl.glColor3f(0.0f, 0.0f, 0.0f);
+		gl.glColor3d(getCor().getRed(), getCor().getGreen(), getCor().getBlue());
 		gl.glLineWidth(tamanho);
 		gl.glPointSize(tamanho);
 
@@ -257,6 +260,14 @@ public final class ObjetoGrafico {
 
 	public void setSelecionado(boolean selecionado) {
 		this.selecionado = selecionado;
+	}
+
+	public Color getCor() {
+		return cor;
+	}
+
+	public void setCor(Color cor) {
+		this.cor = cor;
 	}
 
 }

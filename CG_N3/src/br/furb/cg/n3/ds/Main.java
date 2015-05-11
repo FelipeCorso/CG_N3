@@ -1,5 +1,6 @@
 package br.furb.cg.n3.ds;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -297,6 +298,30 @@ public class Main extends KeyMouseListener implements GLEventListener {
 				objetoGrafico = null;
 				pontoSelecionado = null;
 				desenharRastro = false;
+			}
+			break;
+		/*
+		 * V - Define a cor vermelha para o objeto
+		 */
+		case KeyEvent.VK_V:
+			if (objetoGrafico != null) {
+				objetoGrafico.setCor(Color.RED);
+			}
+			break;
+		/*
+		 * G - Define a cor verde para o objeto
+		 */
+		case KeyEvent.VK_G:
+			if (objetoGrafico != null) {
+				objetoGrafico.setCor(Color.GREEN);
+			}
+			break;
+		/*
+		 * B - Define a cor azul para o objeto
+		 */
+		case KeyEvent.VK_B:
+			if (objetoGrafico != null) {
+				objetoGrafico.setCor(Color.BLUE);
 			}
 			break;
 
